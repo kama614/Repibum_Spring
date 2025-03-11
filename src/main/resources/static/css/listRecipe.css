@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
+:root {
+	--primary: rgb(255, 128, 64);
+	--dark: #21252f;
+	--body: #888;
+	--box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-4 {
+	color: var(--dark);
+	font-weight: 700;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	font-family: "Sora", serif;
+	line-height: 1.7;
+	color: var(--body);
+
+	background-image: url("../images/cook_photo02.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+}
+
+body::after {
+	content: "";
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: rgba(70, 35, 35, 0.5);
+	z-index: -1;
+}
+
+.navbar {
+	background-image: url("../images/screenshot02.png");
+}
+
+.navbar .nav-link {
+	color: white;
+	font-family: "Mochiy Pop One", serif;
+	font-size: 18px;
+	font-weight: 700;
+	padding-top: 16px;
+}
+
+.navbar-toggler-icon {
+	background-image: none;
+	/* デフォルトのアイコンを削除 */
+	background-color: white;
+	/* 白色のバー */
+	width: 30px;
+	height: 3px;
+	border-radius: 2px;
+	display: block;
+	position: relative;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+	content: '';
+	background-color: white;
+	/* 白色のバー */
+	width: 30px;
+	height: 3px;
+	border-radius: 2px;
+	position: absolute;
+	left: 0;
+}
+
+.navbar-toggler-icon::before {
+	top: -10px;
+	/* 上のバー */
+}
+
+.navbar-toggler-icon::after {
+	top: 10px;
+	/* 下のバー */
+}
+
+.nav-item .btn {
+	border: none;
+	padding-top: 16px;
+	background: none;
+}
+
+.navbar-collapse {
+	flex-grow: 0;
+}
+
+h1 {
+	font-family: "Mochiy Pop One", serif;
+	text-align: center;
+	color: white;
+}
+
+h2 {
+	display: inline-block;
+}
+
+
+img {
+	width: 100%;
+	height: 100%;
+
+}
+
+.recipe-list {
+	font-family: "Kosugi Maru", serif;
+	font-size: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	/* 要素間のスペース */
+	text-align: center;
+	margin: 30px 10% 0;
+}
+
+.card {
+	max-width: 100%;
+	/*	画像サイズをカード内で自動調整*/
+	height: 35%;
+	flex: 0 1 calc(25% - 10px);
+	/* カードの幅を調整（全体の25%） */
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	/*  カードの中身を縦並び*/
+	align-items: center;
+	/* 中央揃え*/
+	justify-content: end;
+	/* 上下に要素を配置*/
+	text-align: center;
+	padding: 15px;
+	border: 1px solid rgb(64, 0, 0);
+	/* 境界線(必要に応じて削除)*/
+	border-radius: 5px;
+	/* 角を丸くする*/
+}
+
+.card img {
+	max-width: 100%;
+	/*	画像サイズをカード内で自動調整*/
+	height: auto;
+	padding-bottom: 10%;
+}
+
+.recipe-name {
+	padding-top: auto;
+	/*名前をカード下部に固定*/
+	font-weight: bold;
+	padding-bottom: 15px;
+	font-size: 20px;
+}
+

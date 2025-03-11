@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.app.mapper.RecipeMapper">
+
+	<!-- 共通のSELECT文 -->
+	<sql id="recipeSelect">
+		SELECT
+		recipe.id, recipe.name, recipe.detail,
+		recipe.url, recipe.images
+		FROM recipe
+	</sql>
+
+	<!-- レシピのマッピング設定 -->
+	<resultMap id="recipeMap"
+		type="com.example.app.domain.Recipe">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="detail" property="detail" />
+		<result column="url" property="url" />
+		<result column="images" property="images" />
+	</resultMap>
+
+	<!-- レシピ一覧を取得 -->
+	<select id="findAll" resultMap="recipeMap">
+		<include refid="recipeSelect" />
+	</select>
+
+	<!-- IDによるレシピの取得 -->
+	<select id="findById" parameterType="int" resultMap="recipeMap">
+		<include refid="recipeSelect" />
+		WHERE recipe.id = #{id}
+	</select>
+
+	<!-- レシピの追加 -->
+	<insert id="insert"
+		parameterType="com.example.app.domain.Recipe">
+		INSERT INTO recipe (name, detail, url, images)
+		VALUES (#{name}, #{detail}, #{url}, #{images})
+	</insert>
+
+	<!-- レシピの更新 -->
+	<update id="update"
+		parameterType="com.example.app.domain.Recipe">
+		UPDATE recipe
+		SET name = #{name}, detail = #{detail}, url = #{url}, images = #{images}
+		WHERE id = #{id}
+	</update>
+
+	<!-- レシピの削除 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM recipe WHERE id = #{id}
+	</delete>
+
+</mapper>

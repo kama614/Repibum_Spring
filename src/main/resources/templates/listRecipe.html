@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>レシピリスト</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/listRecipe.css}">
+</head>
+
+<body>
+	<!-- navbar section -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark py-3">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/home}">
+				<h2 class="text-white pt-1">Repibum</h2>
+			</a>
+			<div class="text-white">
+				<h1 class="me-5">レシピリスト</h1>
+			</div>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/listRecipe}">れしぴ</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/register}">とうろく</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">ろぐあうと</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- navbar section -->
+
+	<!-- list section -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="recipe-list col-12 d-flex flex-wrap">
+				<th:block th:each="recipe : ${recipeList}">
+					<div class="card text-center me-3 mt-3">
+						<a th:href="@{/showRecipe(id=${recipe.id})}">
+							<img th:src="@{/images/{imageName}(imageName=${recipe.images})}" alt="Recipe Image"
+								class="img-fluid">
+							<div class="recipe-name">
+								<span th:text="${recipe.name}"></span>
+							</div>
+						</a>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</div>
+	<!-- list section -->
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

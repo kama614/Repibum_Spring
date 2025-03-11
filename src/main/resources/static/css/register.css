@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+:root {
+	--primary: rgb(255, 128, 64);
+	--dark: #21252f;
+	--body: #888;
+	--box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-4 {
+	color: var(--dark);
+	font-weight: 700;
+}
+
+body {
+	font-family: "Sora", serif;
+	line-height: 1.7;
+	color: var(--body);
+
+	background-image: url("../images/cook_photo02.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+}
+
+body::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1200px;
+	top: 0;
+	left: 0;
+	background-color: rgba(70, 35, 35, 0.7);
+	z-index: -1;
+}
+
+.navbar {
+	background-image: url("../images/screenshot02.png");
+}
+
+.navbar .nav-link {
+	color: white;
+	font-family: "Mochiy Pop One", serif;
+	font-size: 18px;
+	font-weight: 700;
+	padding-top: 16px;
+}
+
+.navbar-toggler-icon {
+	background-image: none;
+	/* デフォルトのアイコンを削除 */
+	background-color: white;
+	/* 白色のバー */
+	width: 30px;
+	height: 3px;
+	border-radius: 2px;
+	display: block;
+	position: relative;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+	content: '';
+	background-color: white;
+	/* 白色のバー */
+	width: 30px;
+	height: 3px;
+	border-radius: 2px;
+	position: absolute;
+	left: 0;
+}
+
+.navbar-toggler-icon::before {
+	top: -10px;
+	/* 上のバー */
+}
+
+.navbar-toggler-icon::after {
+	top: 10px;
+	/* 下のバー */
+}
+
+.nav-item .btn {
+	border: none;
+	padding-top: 16px;
+   background: none;
+}
+
+.navbar-collapse{
+	   flex-grow: 0;
+}
+
+h1 {
+	font-family: "Mochiy Pop One", serif;
+	text-align: center;
+	color: white;
+}
+
+
+h2 {
+	display: inline-block;
+}
+
+
+.register-page {
+	width: 700px;
+	padding: 5% 0;
+	margin: auto;
+}
+
+form {
+	position: relative;
+	z-index: 2;
+	background: rgb(187, 174, 174);
+	max-width: 700px;
+	margin: 0 auto 50px;
+	border-radius: 20px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+form .register-form {
+	width: 500px;
+	
+}
+
+form input {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+form button {
+	font-family: "Mochiy Pop One", serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #85633e;
+	width: 60%;
+	border: 0;
+	padding: 15px;
+	border-radius: 20px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+	font-weight: 100;
+}
+
+form button:hover,
+form button:active,
+form button:focus {
+	background: #5e452b;
+}
+
+form .message {
+	margin: 15px 0 0;
+	color: #777676;
+	font-size: 12px;
+}
+
+form .message a {
+	color: #4e2411;
+	text-decoration: none;
+}
+
+table{
+	margin: 5% 5%;
+}
+
+tr{
+	margin: 2%;
+}
+
+th{
+	font-family: "Mochiy Pop One", serif;
+	color: #4e2411;
+	text-align: left;
+	margin: auto;
+	font-weight: 500;
+}
+
+td{
+	padding-left: 20px;
+	padding-top: 10px;
+}
