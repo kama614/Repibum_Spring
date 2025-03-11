@@ -136,34 +136,34 @@ img {
 	margin: 30px 10% 0;
 }
 
-.card {
-	max-width: 100%;
-	/*	画像サイズをカード内で自動調整*/
-	height: 35%;
-	flex: 0 1 calc(25% - 10px);
-	/* カードの幅を調整（全体の25%） */
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	/*  カードの中身を縦並び*/
-	align-items: center;
-	/* 中央揃え*/
-	justify-content: end;
-	/* 上下に要素を配置*/
-	text-align: center;
-	padding: 15px;
-	border: 1px solid rgb(64, 0, 0);
-	/* 境界線(必要に応じて削除)*/
-	border-radius: 5px;
-	/* 角を丸くする*/
-}
+/*.card {*/
+/*	max-width: 100%;*/
+/*		画像サイズをカード内で自動調整*/
+/*	height: 35%;*/
+/*	flex: 0 1 calc(25% - 10px);*/
+/*	 カードの幅を調整（全体の25%） */
+/*	box-sizing: border-box;*/
+/*	display: flex;*/
+/*	flex-direction: column;*/
+/*	  カードの中身を縦並び*/
+/*	align-items: center;*/
+/*	 中央揃え*/
+/*	justify-content: end;*/
+/*	 上下に要素を配置*/
+/*	text-align: center;*/
+/*	padding: 15px;*/
+/*	border: 1px solid rgb(64, 0, 0);*/
+/*	 境界線(必要に応じて削除)*/
+/*	border-radius: 5px;*/
+/*	 角を丸くする*/
+/*}*/
 
-.card img {
-	max-width: 100%;
-	/*	画像サイズをカード内で自動調整*/
-	height: auto;
-	padding-bottom: 10%;
-}
+/*.card img {*/
+/*	max-width: 100%;*/
+/*		画像サイズをカード内で自動調整*/
+/*	height: auto;*/
+/*	padding-bottom: 10%;*/
+/*}*/
 
 .recipe-name {
 	padding-top: auto;

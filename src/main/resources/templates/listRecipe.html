@@ -25,8 +25,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link" th:href="@{/listRecipe}">れしぴ</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/register}">とうろく</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/recipe/list}">れしぴ</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/recipe/register}">とうろく</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">ろぐあうと</a></li>
 				</ul>
 			</div>
@@ -40,7 +40,7 @@
 			<div class="recipe-list col-12 d-flex flex-wrap">
 				<th:block th:each="recipe : ${recipeList}">
 					<div class="card text-center me-3 mt-3">
-						<a th:href="@{/showRecipe(id=${recipe.id})}">
+						<a th:href="@{/recipe/show/{id}(id=${recipe.id})}">
 							<img th:src="@{/images/{imageName}(imageName=${recipe.images})}" alt="Recipe Image"
 								class="img-fluid">
 							<div class="recipe-name">

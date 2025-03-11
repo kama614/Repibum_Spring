@@ -34,7 +34,7 @@
 	</select>
 
 	<!-- レシピの追加 -->
-	<insert id="insert"
+	<insert id="add"
 		parameterType="com.example.app.domain.Recipe">
 		INSERT INTO recipe (name, detail, url, images)
 		VALUES (#{name}, #{detail}, #{url}, #{images})
