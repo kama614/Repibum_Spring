@@ -138,16 +138,17 @@ img {
 
 .sentence {
 	font-family: "Kosugi Maru", serif;
-	background-color: rgba(255, 255, 255,0.9);
+	background-color: rgba(255, 255, 255, 0.9);
 	padding: 0 50px 50px;
 	border-radius: 15px;
 
 }
 
-.sentence-in{
+.sentence-in {
 	text-align: left;
 }
 
 .showurl {
 	display: inline-block;
 }
+
