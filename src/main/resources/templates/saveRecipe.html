@@ -36,40 +36,50 @@
 
 	<!-- register section -->
 	<div class="register-page container">
-		<form class="register-form" th:action="@{/recipe/register}" method="post" th:object="${recipe}">
+		<form class="register-form" action="" method="post" th:object="${recipe}">
+			<!-- 画像のエラー表示 -->
 			<span th:errors="*{images}" class="error"></span>
-			<p class="mt-2">写真：<input type="file" th:field="*{images}"></p>
+			<!-- 既存の画像の表示 -->
+			<p class="mt-2">写真：
+				<input type="file" th:field="*{images}">
+				<!-- 既存の画像がある場合、表示する -->
+				<br>
+				<img th:if="${recipe.images}" th:src="@{${recipe.images}}" alt="既存の画像" style="max-width: 300px;" />
+			</p>
 
 			<span th:errors="*{name}" class="error"></span>
 			<p class="mt-2">料理名：<input type="text" th:field="*{name}"></p>
 
 			<span th:errors="*{detail}" class="error"></span>
-			<p class="mt-2">詳細：<textarea name="detail" cols="50" rows="10" th:field="*{detail}"></textarea></p>
+			<p class="mt-2">材料・調味料・作り方：<textarea name="detail" cols="50" rows="10" th:field="*{detail}"></textarea></p>
 
 			<span th:errors="*{url}" class="error"></span>
 			<p class="mt-2">URL：<input type="text" th:field="*{url}"></p>
 
-			<div class="image">
-				<img th:if="${recipe.images}" th:src="@{/images/{image}(image=${recipe.images})}" alt="Recipe Image">
-				<p th:unless="${recipe.images}">No image available</p>
-			</div>
-			<div class="sentence">
-				<h3 class="pt-4 pb-2" th:text="${recipe.name}"></h3>
-				<div class="sentence-in">
-					<h6>材料・調味料・作り方</h6>
-					<p th:text="${recipe.detail}"></p>
-				</div>
-				<h6 class="showurl">URL：</h6>
-				<a th:if="${recipe.url}" th:href="${recipe.url}" th:text="${recipe.url}"></a>
-				<p th:unless="${recipe.url}"></p>
-			</div>
-			<button type="submit">登録する</button>
+			<button type="submit">保存する</button>
 		</form>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
 		crossorigin="anonymous"></script>
+
+	<script>
+		function previewImage(event) {
+			const input = event.target;
+			const file = input.files[0]; // 選択されたファイルを取得
+
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = function () {
+					const img = document.getElementById('imagePreview');
+					img.src = reader.result; // 読み込んだデータURLをプレビューに設定
+					img.style.display = "block"; // 画像を表示
+				};
+				reader.readAsDataURL(file); // 画像をDataURLとして読み込む
+			}
+		}
+	</script>
 </body>
 
 </html>
