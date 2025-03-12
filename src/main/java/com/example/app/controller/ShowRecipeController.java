@@ -1,10 +1,5 @@
 package com.example.app.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -65,7 +60,7 @@ public class ShowRecipeController {
 			@PathVariable Integer id,
 			@Valid Recipe recipe,
 			Errors errors,
-			@RequestParam(value = "images", required = false) MultipartFile images, // 画像ファイルの受け取り
+			@RequestParam(value = "images", required = false) MultipartFile images,
 			RedirectAttributes rd,
 			Model model) {
 
@@ -76,36 +71,22 @@ public class ShowRecipeController {
 			return "saveRecipe";
 		}
 
-		// 画像がアップロードされた場合、画像を保存してパスを設定
+		// 画像が選択されている場合のみ画像アップロード処理を実行
 		if (images != null && !images.isEmpty()) {
-			try {
-				String fileName = System.currentTimeMillis() + "-" + images.getOriginalFilename();
-				String uploadDir = "src/main/resources/static/images"; // 画像保存先ディレクトリ
-				Path path = Paths.get(uploadDir, fileName);
-				Files.createDirectories(path.getParent()); // 保存先ディレクトリを作成
-				images.transferTo(path.toFile()); // 画像ファイルを保存
-
-				// 画像パスをレシピオブジェクトにセット
-				recipe.setImages("/images/" + fileName);
-			} catch (IOException e) {
-				e.printStackTrace();
-				model.addAttribute("statusMessage", "画像のアップロードに失敗しました。");
-				return "saveRecipe";
-			}
+			recipeService.updateRecipeWithImage(recipe, images);
 		} else {
-			// 画像が選択されなかった場合、既存の画像を保持
+			// 画像が選択されていない場合は、既存の画像を保持
 			Recipe existingRecipe = recipeService.getRecipeById(id);
 			recipe.setImages(existingRecipe.getImages());
 		}
 
 		// レシピIDを設定して更新
-		recipe.setId(id); //更新に必要なレシピID をセット
+		recipe.setId(id); // 更新に必要なレシピIDをセット
 		recipeService.updateRecipe(recipe);
 
 		// 更新完了メッセージ
 		rd.addFlashAttribute("statusMessage", "レシピ情報を更新しました。");
-		rd.addFlashAttribute("id", id); // idをFlashAttributeに追加
-		return "redirect:/show/{id}";
+		return "redirect:/show/{id}"; // 更新後に詳細ページにリダイレクト
 	}
 
 	// レシピデータの削除
