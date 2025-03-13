@@ -6,7 +6,7 @@
 	<title>レシピの編集</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-	<link rel="stylesheet" th:href="@{/css/register.css}">
+	<link rel="stylesheet" th:href="@{/css/saveRecipe.css}">
 </head>
 
 <body>
@@ -37,25 +37,29 @@
 	<!-- register section -->
 	<div class="register-page container">
 		<form class="register-form" action="" method="post" th:object="${recipe}">
-			<!-- 画像のエラー表示 -->
-			<span th:errors="*{images}" class="error"></span>
-			<!-- 既存の画像の表示 -->
-			<p class="mt-2">写真：
-				<input type="file" th:field="*{images}">
-				<!-- 既存の画像がある場合、表示する -->
-				<br>
-				<img th:if="${recipe.images}" th:src="@{${recipe.images}}" alt="既存の画像" style="max-width: 300px;" />
-			</p>
-
-			<span th:errors="*{name}" class="error"></span>
-			<p class="mt-2">料理名：<input type="text" th:field="*{name}"></p>
-
-			<span th:errors="*{detail}" class="error"></span>
-			<p class="mt-2">材料・調味料・作り方：<textarea name="detail" cols="50" rows="10" th:field="*{detail}"></textarea></p>
-
-			<span th:errors="*{url}" class="error"></span>
-			<p class="mt-2">URL：<input type="text" th:field="*{url}"></p>
-
+			<table>
+				<tr>
+					<p>料理名</p>
+					<input type="text" name="name" th:field="*{name}">
+				</tr>
+				<tr>
+					<p>材料・調味料・作り方</p>
+					<textarea name="detail" cols="50" rows="4" th:field="*{detail}"></textarea>
+				</tr>
+				<tr>
+					<p>URL</p>
+					<input type="text" name="url" th:field="*{url}">
+				</tr>
+				<tr>
+					<p>写真</p>
+					<input type="file" th:field="*{upfile}" id="upfile" accept="image/*" onchange="previewImage(event)">
+					<br>
+					<img id="imagePreview" src="#" alt="画像プレビュー" style="display: none; max-width: 300px;">
+					<!-- 既存の画像がある場合、表示する -->
+					<br>
+					<img th:if="*{images}" th:src="@{${recipe.images}}" alt="既存の画像" style="max-width: 300px;" />
+				</tr>
+			</table>
 			<button type="submit">保存する</button>
 		</form>
 	</div>

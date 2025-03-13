@@ -41,7 +41,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/uploads/**", "/static/**")
-				.addResourceLocations("file:///C:/Users/zd3N02/uploads/", "classpath:/static/");
+				.addResourceLocations("file:/C:/Users/zd3N02/uploads/", "classpath:/static/");
 		// TODO 自動生成されたメソッド・スタブ
 	}
 

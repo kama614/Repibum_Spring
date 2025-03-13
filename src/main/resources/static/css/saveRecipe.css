@@ -112,6 +112,12 @@ h2 {
 	display: inline-block;
 }
 
+p{
+	font-family: "Mochiy Pop One", serif;
+	color: #4e2411;
+	margin: auto;
+	font-weight: 500;
+}
 
 .register-page {
     display: flex;
@@ -122,13 +128,12 @@ h2 {
     box-sizing: border-box;
     overflow: auto; /* 縦にスクロール可能にする */
 }
-
 form {
 	position: relative;
 	z-index: 2;
 	background: rgb(187, 174, 174);
 	max-width: 70%;
-	max-height: 700px;
+	max-height:700px;
 	margin: 0 auto 50px;
 	border-radius: 20px;
 	padding: 45px;
@@ -137,7 +142,7 @@ form {
 }
 
 form .register-form {
-	width: 500px;
+	width: 300px;
 	
 }
 
@@ -188,18 +193,18 @@ form .message a {
 }
 
 table{
-	margin: 0 5%;
+	margin: 5% 5%;
 }
 
 tr{
-	margin: 2%;
+    margin-bottom: 20px; /* 下に余白を追加 */
 }
 
 th{
-	width: 50px;
 	font-family: "Mochiy Pop One", serif;
 	color: #4e2411;
 	text-align: left;
+	margin: auto;
 	font-weight: 500;
 }
 
@@ -210,7 +215,7 @@ td{
 
 /* 各フォーム要素を整列 */
 input[type="text"],input[type="file"], textarea {
-    width: 100%; /* 幅を100%にして親要素の幅に収める */
+    width: 90%; /* 幅を100%にして親要素の幅に収める */
     padding: 10px;
     margin-top: 5px;
     box-sizing: border-box; /* パディングを幅に含める */
