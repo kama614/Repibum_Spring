@@ -1,21 +1,19 @@
 package com.example.app.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Recipe;
 import com.example.app.service.RecipeService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -25,85 +23,49 @@ public class RegisterRecipeController {
 
 	private final RecipeService recipeService;
 
+	// レシピ登録フォーム表示
 	@GetMapping("/register")
 	public String showRegisterForm(HttpSession session, Model model) {
 		// セッションの確認
 		if (session.getAttribute("loginId") == null) {
 			return "redirect:/login"; // ログイン画面にリダイレクト
 		}
-
-		try {
-			// レシピ一覧データの取得
-			List<Recipe> recipeList = recipeService.getAllRecipes();
-			model.addAttribute("recipeList", recipeList);
-
-			return "register"; // Thymeleafのテンプレート
-		} catch (Exception e) {
-			e.printStackTrace(); // 運用環境ではロギングを使用
-			throw new RuntimeException("レシピ一覧の取得中にエラーが発生しました。", e);
-		}
+		model.addAttribute("recipe", new Recipe());
+		return "register";
 	}
 
 	@PostMapping("/register")
 	public String registerRecipe(
-			@RequestParam("name") String name,
-			@RequestParam("detail") String detail,
-			@RequestParam("url") String url,
-			@RequestParam("images") MultipartFile file,
 			HttpSession session,
+			@Valid Recipe recipe,
+			Errors errors,
+			RedirectAttributes ra,
 			Model model) {
 
-		// セッションの確認
-		if (session.getAttribute("loginId") == null) {
-			return "redirect:/login";
-		}
-
 		// バリデーション
-		boolean isValid = !name.isBlank();
-		String fileName = "";
-
-		if (!file.isEmpty()) {
-			String fileType = file.getContentType();
-
-			// ファイルが画像であることを確認する
-			if (fileType == null || !fileType.startsWith("image/")) {
-				isValid = false;
+		MultipartFile upfile = recipe.getUpfile();
+		if (!upfile.isEmpty()) {
+			// 画像か否か判定する
+			String type = upfile.getContentType();
+			if (!type.startsWith("image/")) {
+				// 画像ではない場合、エラーメッセージを表示
+				errors.rejectValue("upfile", "error.not_image_file");
 			}
 		}
 
-		if (!isValid) {
-			return "register"; // エラー時は再表示
+		if (errors.hasErrors()) {
+			model.addAttribute("recipeList", recipeService.getAllRecipes());
+			return "register";
 		}
 
-		try {
-			// 画像を保存
-			if (!file.isEmpty()) {
-				File uploadDir = new File("C:/Users/zd3N02/temp"); // 保存先パス
-				if (!uploadDir.exists()) {
-					uploadDir.mkdirs();
-				}
-				fileName = file.getOriginalFilename();
-				file.transferTo(new File(uploadDir, fileName));
-			}
+		// データベースに登録
+		recipeService.addRecipe(recipe);
 
-			// レシピデータの作成
-			Recipe recipe = new Recipe();
-			recipe.setName(name);
-			recipe.setDetail(detail);
-			recipe.setUrl(url);
-			recipe.setImages(fileName);
+		ra.addFlashAttribute("statusMessage", "レシピを追加しました。");
+		return "redirect:/recipe/list"; // 登録完了後に一覧ページへ
 
-			// データベースに登録
-			recipeService.addRecipe(recipe);
-
-			return "redirect:/recipe/list"; // 登録完了後に一覧ページへ
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException("レシピの登録中にエラーが発生しました。", e);
-		}
 	}
 }
-
 
 /*
 	

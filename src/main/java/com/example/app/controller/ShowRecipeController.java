@@ -73,7 +73,7 @@ public class ShowRecipeController {
 
 		// 画像が選択されている場合のみ画像アップロード処理を実行
 		if (images != null && !images.isEmpty()) {
-			recipeService.updateRecipeWithImage(recipe, images);
+			recipeService.updateRecipe(recipe);
 		} else {
 			// 画像が選択されていない場合は、既存の画像を保持
 			Recipe existingRecipe = recipeService.getRecipeById(id);

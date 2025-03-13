@@ -1,9 +1,7 @@
 package com.example.app.service;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -34,37 +32,35 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public void addRecipe(Recipe recipe) {
+
+		// 画像が選択されている場合の処理
+		MultipartFile upfile = recipe.getUpfile();
+		if (!upfile.isEmpty()) {
+			String photo = upfile.getOriginalFilename();
+			recipe.setImages(photo); // 画像名をセット
+
+			// ファイル保存ディレクトリの作成
+			String uploadDir = "C:/Users/zd3N02/uploads/"; // 設定ファイルで管理するのが望ましい
+			File directory = new File(uploadDir);
+			if (!directory.exists()) {
+				directory.mkdirs(); // ディレクトリが存在しない場合は作成
+			}
+
+			// 画像ファイルの保存
+			File dest = new File(uploadDir + photo);
+			try {
+				upfile.transferTo(dest);
+			} catch (IOException e) {
+				throw new RuntimeException("画像の保存に失敗しました", e);
+			}
+		}
+
+		// recipeテーブルへの追加（画像情報を含める）
 		recipeMapper.add(recipe);
 	}
 
 	@Override
 	public void updateRecipe(Recipe recipe) {
-		recipeMapper.update(recipe);
-	}
-
-	@Override
-	public void updateRecipeWithImage(Recipe recipe, MultipartFile images) {
-		// 画像アップロード処理
-		if (!images.isEmpty()) {
-			try {
-				String fileName = System.currentTimeMillis() + "-" + images.getOriginalFilename();
-				String uploadDir = "src/main/resources/static/images"; // 画像保存先ディレクトリ
-				Path path = Paths.get(uploadDir, fileName);
-				Files.createDirectories(path.getParent()); // 保存先ディレクトリを作成
-				images.transferTo(path.toFile()); // 画像ファイルを保存
-
-				// 画像パスをレシピオブジェクトにセット
-				recipe.setImages("/images/" + fileName);
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("画像のアップロードに失敗しました。");
-			}
-		} else {
-			// 画像が選択されなかった場合、既存の画像を保持
-			Recipe existingRecipe = recipeMapper.findById(recipe.getId());
-			recipe.setImages(existingRecipe.getImages());
-		}
-
 		recipeMapper.update(recipe);
 	}
 

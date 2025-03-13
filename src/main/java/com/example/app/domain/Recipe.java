@@ -1,5 +1,7 @@
 package com.example.app.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -12,7 +14,8 @@ public class Recipe {
 	private String detail;
 	private String url;
 	private String images;
-	
-	
-	
+
+	// 画像のアップロード
+	private MultipartFile upfile;
+
 }
