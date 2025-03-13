@@ -41,7 +41,7 @@
 				<th:block th:each="recipe : ${recipeList}">
 					<div class="card text-center me-3 mt-3">
 						<a th:href="@{/recipe/show/{id}(id=${recipe.id})}">
-							<img th:src="@{/images/{imageName}(imageName=${recipe.images})}" alt="Recipe Image"
+							<img th:src="@{/uploads/{imageName}(imageName=${recipe.images})}" alt="Recipe Image"
 								class="img-fluid">
 							<div class="recipe-name">
 								<span th:text="${recipe.name}"></span>

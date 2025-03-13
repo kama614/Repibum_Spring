@@ -40,8 +40,8 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	// uploadsフォルダをリソースとして利用可能にする
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/uploads/**", "/static/**")
-				.addResourceLocations("file:/C:/Users/zd3N02/uploads/", "classpath:/static/");
+		registry.addResourceHandler("/uploads/**")
+				.addResourceLocations("file:///C:/Users/zd3N02/uploads/");
 		// TODO 自動生成されたメソッド・スタブ
 	}
 
