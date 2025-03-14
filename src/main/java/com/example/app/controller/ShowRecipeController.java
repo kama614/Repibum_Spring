@@ -27,7 +27,7 @@ public class ShowRecipeController {
 
 	@GetMapping("/show/{id}")
 	public String showRecipe(
-			@PathVariable int id, // URL のパスの一部をメソッドの引数として取得
+			@PathVariable Integer id, // URL のパスの一部をメソッドの引数として取得
 			HttpSession session, // 現在のセッション情報を取得・管理
 			Model model) { // テンプレート（Thymeleaf など）にデータを渡す
 
@@ -58,24 +58,21 @@ public class ShowRecipeController {
 	@PostMapping("/update/{id}")
 	public String updatePost(
 			@PathVariable Integer id,
-			@Valid Recipe recipe,
+			@Valid @ModelAttribute Recipe recipe,
 			Errors errors,
-			@RequestParam(value = "images", required = false) MultipartFile images,
+			@RequestParam(value = "uploads", required = false) MultipartFile images,
 			RedirectAttributes rd,
 			Model model) {
 
 		// 入力内容にエラーがある場合は編集画面に戻る
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "レシピの編集");
-			model.addAttribute("recipe", recipeService.getRecipeById(id));
+			model.addAttribute("recipe", recipe);
 			return "saveRecipe";
 		}
 
-		// 画像が選択されている場合のみ画像アップロード処理を実行
+		// 画像が選択されていない場合は、既存の画像を保持
 		if (images != null && !images.isEmpty()) {
-			recipeService.updateRecipe(recipe);
-		} else {
-			// 画像が選択されていない場合は、既存の画像を保持
 			Recipe existingRecipe = recipeService.getRecipeById(id);
 			recipe.setImages(existingRecipe.getImages());
 		}
@@ -86,7 +83,8 @@ public class ShowRecipeController {
 
 		// 更新完了メッセージ
 		rd.addFlashAttribute("statusMessage", "レシピ情報を更新しました。");
-		return "redirect:/show/{id}"; // 更新後に詳細ページにリダイレクト
+		System.out.println("Redirecting to: /show/" + id);
+		return "redirect:/recipe/show/" + id; // 更新後に詳細ページにリダイレクト
 	}
 
 	// レシピデータの削除

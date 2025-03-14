@@ -36,7 +36,9 @@
 
 	<!-- register section -->
 	<div class="register-page container">
-		<form class="register-form" action="" method="post" th:object="${recipe}">
+		<form class="register-form" action="" method="post" th:object="${recipe}"
+			enctype="multipart/form-data">
+			<input type="hidden" name="id" th:field="*{id}">
 			<table>
 				<tr>
 					<p>料理名</p>
