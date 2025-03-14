@@ -117,6 +117,17 @@ h2 {
 	display: inline-block;
 }
 
+span {
+	font-family: "Mochiy Pop One", serif;
+	color: #4e2411;
+	font-weight: 500;
+	width: 100%;
+	/* 幅を100%にして親要素の幅に収める */
+	height: auto;
+	box-sizing: border-box;
+	/* パディングを幅に含める */
+}
+
 .recipe-list {
 	font-family: "Kosugi Maru", serif;
 	font-size: 1rem;
@@ -129,43 +140,42 @@ h2 {
 }
 
 .card {
-	width: 50%;
-	height: 30%;
-	/* 画像サイズをカード内で自動調整 */
-	flex: 0 1 calc(25% - 10px);
-	/* カードの幅を調整（全体の25%） */
+	width: calc(25% - 10px);
+	/* 4列に配置（レスポンシブ考慮） */
+	height: 25%;
+	/* 高さを固定 */
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	/* カードの中身を縦並び */
+	/* 縦並び */
 	align-items: center;
-	/* 中央揃え */
-	justify-content: space-between;
-	/* 上下のスペースを分けて、名前を下に配置 */
+	justify-content: flex-start;
 	text-align: center;
 	padding: 15px;
 	border: 1px solid rgb(64, 0, 0);
-	/* 境界線(必要に応じて削除) */
 	border-radius: 5px;
-	/* 角を丸くする */
+	background: white;
+	overflow: hidden;
+	/* はみ出し防止 */
 }
 
 .card img {
-	max-width: 100%;
-	height: auto;
-	/* 高さは自動調整 */
+	width: 100%;
+	height: 70%;
+	/* 画像の高さを固定 */
 	object-fit: cover;
-	/* 画像がカード内で均等に表示される */
-}
-
-.card .content {
-	flex-grow: 1;
-	/* 内容部分を伸ばして、aタグが下部に行くように */
+	/* 画像を枠内に調整 */
+	border-radius: 5px;
 }
 
 .recipe-name {
-	/*名前をカード下部に固定*/
 	font-weight: bold;
-	padding-bottom: 5px;
-	font-size: 20px;
+	font-size: 16px;
+	flex-grow: 1;
+	/* 余ったスペースを埋める */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-top: 10px;
 }

@@ -37,20 +37,24 @@
 	<!-- recipe show section -->
 	<div class="show-details container">
 		<div class="sentence">
-		<div class="image">
-			<!-- 画像がある場合はその画像を表示、ない場合はデフォルト画像を表示 -->
-			<img th:src="@{${recipe.images != null && recipe.images != '' ? '/uploads/' + recipe.images : '/images/no_image_square.jpg'}}"
-				alt="Recipe Image">
-		</div>
+			<div class="image">
+				<!-- 画像がある場合はその画像を表示、ない場合はデフォルト画像を表示 -->
+				<img th:src="@{${recipe.images != null && recipe.images != '' ? '/uploads/' + recipe.images : '/images/no_image_square.jpg'}}"
+					alt="Recipe Image">
+			</div>
 			<h3 class="pt-4 pb-2" th:text="${recipe.name}"></h3>
 			<div class="sentence-in">
 				<h6>材料・調味料・作り方</h6>
-				<p th:text="${recipe.detail}"></p>
+				<p th:text="${recipe.detail}" style="white-space: pre-wrap;"></p>
 			</div>
 			<h6 class="showurl">URL：</h6>
 			<a th:if="${recipe.url}" th:href="${recipe.url}" th:text="${recipe.url}"></a>
 			<p th:unless="${recipe.url}"></p><br>
+			<!--戻る・編集・削除ボタン-->
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 ">
+				<a th:href="@{/recipe/list}" class="btn btn-outline-dark me-2" tabindex="-1" role="button"
+					aria-disabled="true"
+					style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">戻る</a>
 				<a th:href="@{/recipe/update/{id}(id=${recipe.id})}" class="btn btn-primary me-2" tabindex="-1"
 					role="button" aria-disabled="true"
 					style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">編集</a>

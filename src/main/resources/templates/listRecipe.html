@@ -39,16 +39,14 @@
 		<div class="row">
 			<div class="recipe-list col-12 d-flex flex-wrap">
 				<th:block th:each="recipe : ${recipeList}">
-					<div class="card text-center me-3 mt-3">
-						<a th:href="@{/recipe/show/{id}(id=${recipe.id})}">
-							<!-- 画像があるかないかをチェックして、ない場合はデフォルトの画像を表示 -->
-							<img th:src="@{${recipe.images != null && recipe.images != '' ? '/uploads/' + recipe.images : '/images/no_image_square.jpg'}}"
-								alt="Recipe Image" class="img-fluid">
-							<div class="recipe-name">
-								<span th:text="${recipe.name}"></span>
-							</div>
-						</a>
-					</div>
+					<a th:href="@{/recipe/show/{id}(id=${recipe.id})}" class="card text-center me-3 mt-3">
+						<!-- 画像があるかないかをチェックして、ない場合はデフォルトの画像を表示 -->
+						<img th:src="@{${recipe.images != null && recipe.images != '' ? '/uploads/' + recipe.images : '/images/no_image_square.jpg'}}"
+							alt="Recipe Image" class="img-fluid">
+						<div class="recipe-name">
+							<span th:text="${recipe.name}"></span>
+						</div>
+					</a>
 				</th:block>
 			</div>
 		</div>
