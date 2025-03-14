@@ -65,6 +65,9 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public void updateRecipe(Recipe recipe) {
 
+		// 既存のレシピ情報を取得
+		Recipe existingRecipe = recipeMapper.findById(recipe.getId());
+
 		// 画像が選択されている場合の処理
 		MultipartFile upfile = recipe.getUpfile();
 		if (!upfile.isEmpty()) {
@@ -85,6 +88,9 @@ public class RecipeServiceImpl implements RecipeService {
 			} catch (IOException e) {
 				throw new RuntimeException("画像の保存に失敗しました", e);
 			}
+		} else {
+			// 画像が選択されていない場合は、既存の画像をセット
+			recipe.setImages(existingRecipe.getImages());
 		}
 
 		// レシピテーブルの更新
