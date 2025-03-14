@@ -36,11 +36,12 @@
 
 	<!-- recipe show section -->
 	<div class="show-details container">
+		<div class="sentence">
 		<div class="image">
 			<!-- 画像がある場合はその画像を表示、ない場合はデフォルト画像を表示 -->
-		<img th:src="@{${recipe.images != null && recipe.images != '' ? '/uploads/' + recipe.images : '/images/no_image_square.jpg'}}" alt="Recipe Image">
+			<img th:src="@{${recipe.images != null && recipe.images != '' ? '/uploads/' + recipe.images : '/images/no_image_square.jpg'}}"
+				alt="Recipe Image">
 		</div>
-		<div class="sentence">
 			<h3 class="pt-4 pb-2" th:text="${recipe.name}"></h3>
 			<div class="sentence-in">
 				<h6>材料・調味料・作り方</h6>
