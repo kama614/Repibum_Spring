@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,10 +72,16 @@ public class ShowRecipeController {
 			return "saveRecipe";
 		}
 
-		// 画像が選択されていない場合は、既存の画像を保持
+		Recipe existingRecipe = recipeService.getRecipeById(id);
+
+		// バリデーション（画像が選択されている場合のみチェック）
 		if (images != null && !images.isEmpty()) {
-			Recipe existingRecipe = recipeService.getRecipeById(id);
-			recipe.setImages(existingRecipe.getImages());
+			String type = images.getContentType();
+			if (type == null || !type.startsWith("image/")) {
+				errors.rejectValue("upfile", "error.not_image_file");
+				model.addAttribute("recipe", recipe);
+				return "saveRecipe";
+			}
 		}
 
 		// レシピIDを設定して更新

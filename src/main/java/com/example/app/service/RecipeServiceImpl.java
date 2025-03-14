@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class RecipeServiceImpl implements RecipeService {
 
 	private final RecipeMapper recipeMapper;
+	@Value("${image.upload.dir}") // 保存先ディレクトリ（application.propertiesから取得）
+	private String imageUploadDir;
 
 	@Override
 	public List<Recipe> getAllRecipes() {
@@ -61,6 +64,30 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public void updateRecipe(Recipe recipe) {
+
+		// 画像が選択されている場合の処理
+		MultipartFile upfile = recipe.getUpfile();
+		if (!upfile.isEmpty()) {
+			String photo = upfile.getOriginalFilename();
+			recipe.setImages(photo); // 画像名をセット
+
+			// ファイル保存ディレクトリの作成
+			String uploadDir = "C:/Users/zd3N02/uploads/"; // 設定ファイルで管理するのが望ましい
+			File directory = new File(uploadDir);
+			if (!directory.exists()) {
+				directory.mkdirs(); // ディレクトリが存在しない場合は作成
+			}
+
+			// 画像ファイルの保存
+			File dest = new File(uploadDir + photo);
+			try {
+				upfile.transferTo(dest);
+			} catch (IOException e) {
+				throw new RuntimeException("画像の保存に失敗しました", e);
+			}
+		}
+
+		// レシピテーブルの更新
 		recipeMapper.update(recipe);
 	}
 

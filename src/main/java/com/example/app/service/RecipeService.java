@@ -15,4 +15,5 @@ public interface RecipeService {
 	void updateRecipe(Recipe recipe);
 
 	void deleteRecipe(Integer id);
+	
 }
