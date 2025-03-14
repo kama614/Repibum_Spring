@@ -128,7 +128,7 @@ form {
 	z-index: 2;
 	background: rgb(187, 174, 174);
 	max-width: 70%;
-	max-height: 700px;
+	max-height:auto;
 	margin: 0 auto 50px;
 	border-radius: 20px;
 	padding: 45px;
