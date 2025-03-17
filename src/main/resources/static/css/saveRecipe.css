@@ -94,11 +94,11 @@ body::after {
 .nav-item .btn {
 	border: none;
 	padding-top: 16px;
-   background: none;
+	background: none;
 }
 
-.navbar-collapse{
-	   flex-grow: 0;
+.navbar-collapse {
+	flex-grow: 0;
 }
 
 h1 {
@@ -112,7 +112,7 @@ h2 {
 	display: inline-block;
 }
 
-p{
+p {
 	font-family: "Mochiy Pop One", serif;
 	color: #4e2411;
 	margin: auto;
@@ -120,13 +120,16 @@ p{
 }
 
 .register-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* ビューポート全体の高さを適用 */
-    padding: 20px; /* 余白を追加 */
-    box-sizing: border-box;
-    overflow: auto; /* 縦にスクロール可能にする */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	/* ビューポート全体の高さを適用 */
+	padding: 20px;
+	/* 余白を追加 */
+	box-sizing: border-box;
+	overflow: auto;
+	/* 縦にスクロール可能にする */
 }
 
 form {
@@ -142,7 +145,7 @@ form {
 
 form .register-form {
 	width: 300px;
-	
+
 }
 
 form input {
@@ -191,15 +194,16 @@ form .message a {
 	text-decoration: none;
 }
 
-table{
+table {
 	margin: 5% 5%;
 }
 
-tr{
-    margin-bottom: 20px; /* 下に余白を追加 */
+tr {
+	margin-bottom: 20px;
+	/* 下に余白を追加 */
 }
 
-th{
+th {
 	font-family: "Mochiy Pop One", serif;
 	color: #4e2411;
 	text-align: left;
@@ -207,15 +211,43 @@ th{
 	font-weight: 500;
 }
 
-td{
+td {
 	padding-left: 20px;
 	padding-top: 10px;
 }
 
+#removeImageBtn {
+	display: none;
+	/* 初期状態では非表示 */
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	background: rgb(230, 230, 230);
+	color: black;
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 50%;
+	font-size: 16px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 20px;
+}
+
+#removeImageBtn:hover {
+	background: rgb(204, 204, 204);
+	/* ホバー時に色を濃くする */
+}
+
 /* 各フォーム要素を整列 */
-input[type="text"],input[type="file"], textarea {
-    width: 90%; /* 幅を100%にして親要素の幅に収める */
-    padding: 10px;
-    margin-top: 5px;
-    box-sizing: border-box; /* パディングを幅に含める */
+input[type="text"],
+input[type="file"],
+textarea {
+	width: 90%;
+	/* 幅を100%にして親要素の幅に収める */
+	padding: 10px;
+	margin-top: 5px;
+	box-sizing: border-box;
+	/* パディングを幅に含める */
 }
