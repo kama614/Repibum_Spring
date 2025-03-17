@@ -11,7 +11,7 @@
 
 <body>
 	<!-- navbar section -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-dark py-3">
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark py-3 fixed-top">
 		<div class="container">
 			<a class="navbar-brand" th:href="@{/home}">
 				<h2 class="text-white pt-1">Repibum</h2>
@@ -37,7 +37,7 @@
 	<!-- list section -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="recipe-list col-12 d-flex flex-wrap">
+			<div class="recipe-list">
 				<th:block th:each="recipe : ${recipeList}">
 					<a th:href="@{/recipe/show/{id}(id=${recipe.id})}" class="card text-center me-3 mt-3">
 						<!-- 画像があるかないかをチェックして、ない場合はデフォルトの画像を表示 -->
