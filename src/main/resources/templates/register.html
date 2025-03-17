@@ -39,7 +39,9 @@
 		<form class="register-form" action="" method="post" th:object="${recipe}" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<th><p>料理名</p></th>
+					<th>
+						<p>料理名</p>
+					</th>
 					<td><input type="text" name="name" th:field="*{name}"></td>
 				</tr>
 				<tr>
@@ -53,9 +55,13 @@
 				<tr>
 					<th>写真</th>
 					<td>
-						<input type="file" th:field="*{upfile}" id="upfile" accept="image/*" onchange="previewImage(event)">
+						<input type="file" th:field="*{upfile}" id="upfile" accept="image/*"
+							onchange="previewImage(event)">
 						<br>
-						<img id="imagePreview" src="#" alt="画像プレビュー" style="display: none; max-width: 300px;">
+						<div id="preview-container" style="position: relative; display: inline-block;">
+							<img id="imagePreview" src="#" alt="画像プレビュー" style="display: none; max-width: 300px;">
+							<button type="button" id="removeImageBtn" onclick="removeImage()">✕</button>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -71,16 +77,29 @@
 		function previewImage(event) {
 			const input = event.target;
 			const file = input.files[0]; // 選択されたファイルを取得
+			const img = document.getElementById('imagePreview');
+			const removeBtn = document.getElementById('removeImageBtn');
 
 			if (file) {
 				const reader = new FileReader();
 				reader.onload = function () {
-					const img = document.getElementById('imagePreview');
 					img.src = reader.result; // 読み込んだデータURLをプレビューに設定
 					img.style.display = "block"; // 画像を表示
+					removeBtn.style.display = "block"; // ✕ボタンを表示
 				};
 				reader.readAsDataURL(file); // 画像をDataURLとして読み込む
 			}
+		}
+
+		function removeImage() {
+			const img = document.getElementById('imagePreview');
+			const input = document.getElementById('upfile');
+			const removeBtn = document.getElementById('removeImageBtn');
+
+			img.src = "";
+			img.style.display = "none"; // 画像を非表示
+			input.value = ""; // ファイル選択をリセット
+			removeBtn.style.display = "none"; // ✕ボタンを非表示
 		}
 	</script>
 </body>

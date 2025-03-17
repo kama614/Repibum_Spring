@@ -208,6 +208,30 @@ td{
 	padding-top: 10px;
 }
 
+#removeImageBtn {
+	display: none;
+	/* 初期状態では非表示 */
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	background: rgb(230, 230, 230);
+	color: black;
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 50%;
+	font-size: 16px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 20px;
+}
+
+#removeImageBtn:hover {
+	background: rgb(204, 204, 204);
+	/* ホバー時に色を濃くする */
+}
+
 /* 各フォーム要素を整列 */
 input[type="text"],input[type="file"], textarea {
     width: 100%; /* 幅を100%にして親要素の幅に収める */
