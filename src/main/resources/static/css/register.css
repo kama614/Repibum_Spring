@@ -118,7 +118,7 @@ h2 {
     justify-content: center;
     align-items: center;
     height: 95vh; /* ビューポート全体の高さを適用 */
-    padding: 20px; /* 余白を追加 */
+    padding: 100px 20px 20px; /* 余白を追加 */
     box-sizing: border-box;
     overflow: auto; /* 縦にスクロール可能にする */
 }
@@ -129,7 +129,7 @@ form {
 	background: rgb(187, 174, 174);
 	max-width: 70%;
 	max-height:auto;
-	margin: auto auto 50px;
+	margin: 200px auto 50px;
 	border-radius: 20px;
 	padding: 45px;
 	text-align: center;
