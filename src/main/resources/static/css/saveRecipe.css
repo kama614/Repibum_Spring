@@ -134,7 +134,7 @@ form {
 	background: rgb(187, 174, 174);
 	max-width: 70%;
 	max-height:auto;
-	margin: 0 auto 50px;
+	margin: auto auto 50px;
 	border-radius: 20px;
 	padding: 45px;
 	text-align: center;
