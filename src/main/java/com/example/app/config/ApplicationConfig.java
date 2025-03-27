@@ -1,3 +1,4 @@
+// Spring Boot アプリケーションの設定を行うためのクラス
 package com.example.app.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,10 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.app.filter.AuthFilter;
 
-@Configuration
+@Configuration // Spring の設定クラスであることを示すアノテーション
 public class ApplicationConfig implements WebMvcConfigurer {
+	// WebMvcConfigurer インターフェースを実装することで、Web 関連の設定（リソースハンドリング、ビューの設定など）を追加
 
-	// バリデーションメッセージのカスタマイズ
+	// バリデーションの設定(メッセージのカスタマイズ)
 	@Override
 	public Validator getValidator() {
 		var validator = new LocalValidatorFactoryBean();
@@ -26,6 +28,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	ResourceBundleMessageSource messageSource() {
 		var messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasename("validation");
+		// setBasename("validation") は、validation.properties というプロパティファイルを使用することを指定
 		return messageSource;
 	}
 
@@ -34,6 +37,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	FilterRegistrationBean<AuthFilter> authFilter() {
 		var bean = new FilterRegistrationBean<AuthFilter>(new AuthFilter());
 		bean.addUrlPatterns("/recipe/**");
+		// URL が /recipe/ で始まるリクエストに対してのみAuthFilter適用
 		return bean;
 	}
 
@@ -42,7 +46,12 @@ public class ApplicationConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/uploads/**")
 				.addResourceLocations("file:///C:/Users/zd3N02/uploads/");
-		// TODO 自動生成されたメソッド・スタブ
 	}
 
 }
+
+/*
+@Beanアノテーションによって、
+messageSourceとauthFilterは Spring コンテナに登録され、アプリケーション全体で使用可能。
+
+*/
